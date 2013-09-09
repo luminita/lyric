@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+%\usepackage{float}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+\title{{\bf Music and poetry with spotify - Assignment solution}}
+
+\author{
+Luminita Moruz  \\
+\hline
+}
+
+\begin{document}
+\maketitle
+
+\section{Problem formulation \& assumptions}
+\label{sec:problem}
+An algorithm should be implemented that takes as input a message, and
+returns a list of Spotify tracks recreating this message. The
+following requirements should be incorporated: the message should be
+UTF-8, no case sensitivity, the list of tracks returned should be
+short and the number of queries should be reduced to improve speed.
+
+\vspace{0.15cm}
+
+In this implementations, a few simplifications were made:
+\begin{itemize}
+\item {\bf Only exact matches were considered}. Any fragment of the
+  message had to match precisely the full name of a track.
+
+\item {\bf The message was split by punctuation marks}. To improve
+  semantics, the message was split in sentences that are treated
+  separately.
+
+\item {\bf The algorithm gives a results only when a full solution e}
+\end{itemize}
+ 
+
+\section{Implemented solution}
+First, the message is split at any occurence of at any occurence of
+\{``.'', ``;'', ``:'', ``,''\}. Each resulted sentence is processed
+separately as described below.
+
+Let $S = w_0, w_1, ..., w_{n-1}$ be a sentence composed of $n$ words. I 
+
+
+\section{Possible improvements}
+\begin{itemize}
+\item Improve the splitting of the poem in sentences
+
+\item Partial solutions should be provided 
+
+\item Inexact matches should be considered A list of the most
+  commonly used abbreviations, as well as typos can be used to provide
+  an answer even when no exact matches are available. 
+
+\item The list of tracks should match the feeling of the poem
+\end{itemize}
+\end{document}
