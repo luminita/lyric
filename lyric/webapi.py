@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 """
-Provides the ability to interact with the Spotify web API
-by using simple HTTP GET messages
+Provides functions to interact with the Spotify web API by using simple 
+HTTP GET messages
 """
 import urllib2
 import urlparse
@@ -28,15 +28,14 @@ def get_url(track, base):
 
 
 def get_matching_track(track, data):
-    """ Get the name and spotify href id for the track in 
-    data that matches exactly the track. Return None if no track
-    matches precisely """
+    """ Get the spotify href id for the track in the data that 
+    matches exactly the track. Return None if no track is exact match """
     tracks = data["tracks"]
     i = 0 
     while i < len(tracks):
         name = tracks[i]["name"].lower()
         name = name.encode('utf-8')
-        print name, " -- ", track, "---", tracks[i]["href"].split(":")[2] 
+        #print name, " -- ", track, "---", tracks[i]["href"].split(":")[2] 
         if name.strip() == track.strip():
             spotify_id = tracks[i]["href"].split(":")[2]
             return spotify_id
@@ -70,8 +69,9 @@ def search_track(track, base="http://ws.spotify.com/search/1/"):
 
 
 def main():
-    x = "Aldrig ska jag sluta Älska Dig"
+    x = "Tinnitus i hjärtat"
     print search_track(x)
+
 
 if __name__ == "__main__":
     main()
