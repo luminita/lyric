@@ -5,7 +5,7 @@ Provides functions to read, write and process data
 import re
 
 
-def parse_message(message, punctuation_marks="!|\.|;|\?|:"):
+def parse_message(message, punctuation_marks="!|\.|;|\?|:,"):
     """ Splits the message in sentences at each occurence of any of the 
     punctuation marks. Return a list of sentences """
     # split the message in sentences
@@ -25,6 +25,19 @@ def load_message(filename):
     except Exception, e:
         sys.exit(str(e))
     return parse_message(message)
+    
+    
+def print2file(lines, filename):
+    """ Print a list of lines to a file. Note that each line should include
+    the newline character """
+    try:    
+        outf = open(filename, "w")
+        for l in lines:
+            outf.write(l)
+        outf.close()
+    except Exception, e:
+        sys.exit(str(e))
+    
     
     
 def main():
