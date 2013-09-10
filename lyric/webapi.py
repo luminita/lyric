@@ -23,7 +23,7 @@ def get_url(track, base):
     # replace spaces with plus
     track2search = track.replace(" ", "+")
     format_track = "track.json?q="+track2search 
-    url = urlparse.urljoin(base, format_track) 
+    url = urlparse.urljoin(base, format_track)     
     return url 
 
 
@@ -39,7 +39,7 @@ def get_matching_track(track, data):
         if name.strip() == track.strip():
             spotify_id = tracks[i]["href"].split(":")[2]
             return spotify_id
-        i += 1
+        i += 1        
     return None        
  
 
@@ -63,8 +63,7 @@ def search_track(track, base="http://ws.spotify.com/search/1/"):
     # load result in json format 
     data = json.load(response)
     # get the code of the first exact match in the data 
-    spotify_id = get_matching_track(low_case_track, data)
-    
+    spotify_id = get_matching_track(low_case_track, data)    
     return spotify_id   
 
 
