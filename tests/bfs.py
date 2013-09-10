@@ -1,5 +1,7 @@
-sentence = "I dont think of this anymore at all".split(" ")
-w = [[0,2,3], [1,3], [7], [4,5,6], [4,5], [5], [], []]
+import sys
+
+sentence = "My PG's pusses are like juice in the morning".split(" ")
+w = [[2], [2], [2], [5], [], [5], [8], [], []]
 n = len(w)
 
 def backtrack(path, sentence):
@@ -38,14 +40,18 @@ def get_paths(w):
 def get_path(w):
     stack = [(0, w[0][i]) for i in range(0, len(w[0]))]
     path = []
+    found = False
     while len(stack)>0:
         (parent, end) = stack.pop()    
         path.append((parent, end))
-        if end == (n-1):        
+        if end == (n-1):
+            found = True        
             return path
         else:        
             stack += [(end+1, w[end+1][i]) for i in range(0, len(w[end+1]))]
-        
+    if not found:
+        print "No solution!"
+        sys.exit(1)
 
 backtrack(get_path(w), sentence)
 """
