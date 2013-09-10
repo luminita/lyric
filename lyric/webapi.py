@@ -3,10 +3,10 @@
 Provides functions to interact with the Spotify web API by using simple 
 HTTP GET messages
 """
-import urllib2
+import sys
 import urlparse
 import json
-import sys
+import urllib2
 
 
 class MyError(Exception): 
