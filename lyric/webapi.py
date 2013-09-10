@@ -34,21 +34,22 @@ def get_matching_track(track, data):
     i = 0 
     while i < len(tracks):
         name = tracks[i]["name"].lower()
-        name = name.encode('utf-8')
-        #print name, " -- ", track, "---", tracks[i]["href"].split(":")[2] 
-        if name.strip() == track.strip():
+        name = name.encode('utf-8')        
+        if name.strip() == track.strip():            
             spotify_id = tracks[i]["href"].split(":")[2]
             return spotify_id
         i += 1        
     return None        
  
 
-def search_track(track, base="http://ws.spotify.com/search/1/"):
+def search_track(track, cache_dict, base="http://ws.spotify.com/search/1/"):
     """ searches the track_name and returns the unique code 
     of the track if an exact match is found, and None otherwise. """
+    if track in cache_dict:
+        return cache_dict[track]
     low_case_track = track.decode('utf-8').lower()
-    low_case_track = low_case_track.encode('utf-8')
-    url = get_url(low_case_track, base)
+    low_case_track = low_case_track.encode('utf-8')    
+    url = get_url(low_case_track, base)        
     try: 
         # send the request the easy way
         response = urllib2.urlopen(url)
@@ -57,19 +58,21 @@ def search_track(track, base="http://ws.spotify.com/search/1/"):
         if status_code != 200:
            raise MyError("Error at HTTP request. Error status: {}".\
                          format(status_code))
+        # load result in json format 
+        data = json.load(response)
+        # get the code of the first exact match in the data 
+        spotify_id = get_matching_track(low_case_track, data)    
+        cache_dict[track] = spotify_id
+        return spotify_id   
     except Exception, e:
         sys.exit(str(e))
 
-    # load result in json format 
-    data = json.load(response)
-    # get the code of the first exact match in the data 
-    spotify_id = get_matching_track(low_case_track, data)    
-    return spotify_id   
+    
 
 
 def main():
-    x = "Tinnitus i hjärtat"
-    print search_track(x)
+    x = "aldrig ska jag sluta älska dig"    
+    print search_track(x, {})
 
 
 if __name__ == "__main__":
