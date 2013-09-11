@@ -5,7 +5,7 @@ Provides functions to read, write and process data
 import re
 
 
-def parse_message(message, punctuation_marks="!|\.|;|\?|:,"):
+def parse_message(message, punctuation_marks="!|\.|;|\?|:"):
     """ Splits the message in sentences at each occurence of any of the 
     punctuation marks. Return a list of sentences """
     # split the message in sentences
