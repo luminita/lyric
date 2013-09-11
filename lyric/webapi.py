@@ -65,9 +65,7 @@ def search_track(track, cache_dict, base="http://ws.spotify.com/search/1/"):
         cache_dict[track] = spotify_id
         return spotify_id   
     except Exception, e:
-        sys.exit(str(e))
-
-    
+        sys.exit(str(e))    
 
 
 def main():
