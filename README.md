@@ -1,2 +1,74 @@
 lyric
 =====
+Author: Luminita Moruz
+
+
+Description: The package implements a method that, taking as input a sentence
+        or a few sentences, splits each sentence - if possible - in song names. 
+        The result is a set of Spotify playlists reconstructing each sentence. 
+
+
+Requirements: Python 2.7 should be installed, together with the modules argparse, urlparse, 
+              json and urllib2
+
+
+Usage: python main.py [-h] -i message [-m solving_method] [-o out_file]
+
+Flags:
+  -h, --help         Show this help message and exit
+  -i message         Message or file name including the message to be split.
+                     The message can consist of one sentence or a few sentences separated 
+                     by one of the punctuation marks ".", ":", ";", "!", "?".
+  -m solving_method  Method to solve the problem [bfs|fast-bfs], default =
+                     fast-bfs. 
+  -o out_file        Output file. By default the result is printed on the
+                     screen
+
+
+Notes
+------
+1. The software was tested with Python 2.7.3. Small adjustments may be required for other 
+installations of python 
+
+2. The input text is split in sentences, and each sentence is treated separately. 
+Currently, only a few punctuation marks are used for splitting (see -i option above). 
+Other punctuation marks such as commas should be avoided, unless it is desired to have them 
+present in the name of the song. As an example, if one searches "I, can't let go", 
+only songs that match precisely this text will be considered valid solutions. 
+A song called "I can't let go" will thus not be a solution. 
+
+3. At the moment the software provides an output only if a full solution exists.
+As an example, if one searches "I can't let go", and the only song that covers some
+part of this sentence is called "can't let go", no solution is provided. 
+
+
+Examples 
+----------
+The folder examples/ include a few examples of input data.
+1. To run the program for a message "Wherever you will go I'll stand by you. You are mine" you can simply run:
+
+python main.py -i "Wherever you will go I'll stand by you. You are my mine"
+
+The output will be something like:
+
+     ---------------
+     Sentence: Wherever you will go I'll stand by you
+     --------------
+     Wherever you will go --> http://open.spotify.com/track/2fR87xADQylPuAlq7r3Jod
+     I'll stand by you --> http://open.spotify.com/track/3Nf8oGn1okobzjDcFCvT6n
+     ---------------
+     Sentence: You are my mine
+     --------------
+     You are my mine --> http://open.spotify.com/track/5dd0OgF6h9sXrj7jhRPUhB
+
+Thus, for each sentence the songs together with their spotify address are given. Note that if the "." would not have been present, 
+then the whole message would have been treated as one sentence. 
+
+
+2. To run the program for a message in a file, for example the file example_2 in the directory examples/, then simply run:
+
+python main.py -i ../examples/example_2.txt -o playlist.txt
+
+When the option -o is used, a similar output to the one described in Example 1 is written to the file indicated after -o. 
+
+
