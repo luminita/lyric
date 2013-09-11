@@ -7,15 +7,17 @@ from time import time
 import argparse 
 import data_handler
 import bfs
+import fast_bfs
 
 # basename in front of the spotify id when outputing the playlist
 PLAYLIST_BASE = "http://open.spotify.com/track/"
 
 def get_method(method_string):
+    if method_string == "fast-bfs":
+        return fast_bfs.FastBFSSolution.get_solution   
     if method_string == "bfs":
-        return bfs.BFSSolution.get_solution   
-    else:
-        sys.exit("Unknown method {}".format(method_string))
+        return bfs.BFSSolution.get_solution           
+    sys.exit("Unknown method {}".format(method_string))
  
  
 def main():
@@ -24,8 +26,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', help="Message or file name including the message",\
                        metavar="message", required=True)
-    parser.add_argument('-m', help="Method to solve the problem [bfs], default = bfs", \
-                        metavar="solving_method", required=False, default="bfs")     
+    parser.add_argument('-m', help="Method to solve the problem [bfs|fast-bfs], default = fast-bfs", \
+                        metavar="solving_method", required=False, default="fast-bfs")     
     parser.add_argument('-o', help="Output file. By default the result is printed on the screen", \
                         metavar="out_file", required=False, default=None)        
     args = parser.parse_args()    
