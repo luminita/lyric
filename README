@@ -12,7 +12,9 @@ Requirements: Python 2.7 should be installed, together with the modules argparse
               json and urllib2
 
 
-Usage: python main.py [-h] -i message [-m solving_method] [-o out_file]
+Usage: 
+  cd lyric 
+  python main.py [-h] -i message [-m solving_method] [-o out_file]
 
 Flags:
   -h, --help         Show this help message and exit
